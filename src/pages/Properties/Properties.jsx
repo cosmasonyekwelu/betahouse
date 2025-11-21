@@ -57,14 +57,13 @@ export default function Properties() {
         return;
       }
 
-      // If backend returns valid data
       setItems(backendItems);
       setTotal(backendTotal);
 
     } catch (error) {
       console.error("API error → switching to local fallback:", error);
 
-      setErrorMsg("Unable to reach server. Showing offline demo properties.");
+      setErrorMsg("Unable to reach server. Showing offline properties.");
 
       // Fallback offline properties
       const sortedLocal = sortData([...localProperties]);
