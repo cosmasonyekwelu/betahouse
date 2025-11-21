@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api", // backend running on port 5000
+  baseURL: "https://betahouse-backend-o6wn.onrender.com/api", 
 });
 
 // Automatically attach token to every request
