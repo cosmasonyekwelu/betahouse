@@ -12,7 +12,7 @@ const PopularProperties = () => {
       bath: 3,
       size: "720 sq ft",
       location: "Victoria Island, Lagos",
-      image: "../../src/assets/phouse1.jpg"
+      image: "/phouse1.jpg"
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ const PopularProperties = () => {
       bath: 3,
       size: "720 sq ft",
       location: "Victoria Island, Lagos",
-      image: "../../src/assets/phouse2.jpg"
+      image: "/phouse2.jpg"
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const PopularProperties = () => {
       bath: 3,
       size: "720 sq ft",
       location: "Victoria Island, Lagos",
-      image: "../../src/assets/phouse3.jpg"
+      image: "/phouse3.jpg"
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ const PopularProperties = () => {
       bath: 3,
       size: "720 sq ft",
       location: "Victoria Island, Lagos",
-      image: "../../src/assets/phouse4.jpg"
+      image: "/phouse4.jpg"
     }
   ];
 

@@ -4,8 +4,8 @@ import API from "../../api/axios";
 import "./SignIn.css";
 
 
-import authImg from "../../assets/auth.jpg";
-import googleIcon from "../../assets/google-icon.png";
+import authImg from "/auth.jpg";
+import googleIcon from "/google-icon.png";
 
 export default function SignIn() {
   const navigate = useNavigate();

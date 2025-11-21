@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import "./Header.css";
 
-import defaultAvatar from "../../assets/avatar.png";
+import defaultAvatar from "/avatar.png";
 
 export default function Header() {
   const navigate = useNavigate();

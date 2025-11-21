@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios"; 
 import "./SignUp.css";
 
-import authImg from "../../assets/auth.jpg";
-import googleIcon from "../../assets/google-icon.png";
+import authImg from "/auth.jpg";
+import googleIcon from "/google-icon.png";
 
 export default function SignUp() {
   const navigate = useNavigate();
