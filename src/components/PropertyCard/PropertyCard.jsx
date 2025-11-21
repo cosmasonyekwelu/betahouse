@@ -11,17 +11,27 @@ import {
 } from "lucide-react";
 
 export default function PropertyCard({ data }) {
+  const imageUrl =
+    data.images?.[0] ||
+    data.image ||
+    "https://placehold.co/600x400?text=No+Image";
+
+  const city = data.location?.city || "";
+  const area = data.location?.area || "";
+
   return (
     <article className="card">
       {/* IMAGE */}
       <div
         className="card-media"
-        style={{ backgroundImage: `url(${data.image})` }}
+        style={{ backgroundImage: `url(${imageUrl})` }}
       >
         {/* BADGES */}
         <div className="badges">
           {data.featured && <span className="badge-featured">Featured</span>}
-          <span className="badge-type">{data.for}</span>
+          <span className="badge-type">
+            {data.status === "sale" ? "For Sale" : "For Rent"}
+          </span>
         </div>
 
         {/* TOOLS (right bottom icons) */}
@@ -37,19 +47,27 @@ export default function PropertyCard({ data }) {
 
         {/* LOCATION */}
         <div className="meta">
-          <MapPin size={16} /> <span>{data.location}</span>
+          <MapPin size={16} />{" "}
+          <span>
+            {area}, {city}
+          </span>
         </div>
 
         {/* BED / BATH */}
         <div className="specs">
-          <div><BedDouble size={16} /> {data.bedrooms} Bedrooms</div>
-          <div><Bath size={16} /> {data.bathrooms} Bathrooms</div>
+          <div>
+            <BedDouble size={16} /> {data.bedrooms} Bedrooms
+          </div>
+          <div>
+            <Bath size={16} /> {data.bathrooms} Bathrooms
+          </div>
         </div>
 
         {/* PRICE + ACTIONS */}
         <div className="footer-row">
           <div className="price">
-            ₦ {data.price.toLocaleString()} {data.rent && "/ Year"}
+            ₦ {Number(data.price).toLocaleString()}{" "}
+            {data.status === "rent" && "/ Year"}
           </div>
 
           <div className="actions">
