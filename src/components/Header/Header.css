@@ -1,0 +1,375 @@
+/* FULL HEADER BAR */
+.header {
+  width: 100%;
+  background:  #1D293F1F;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+/* INNER CONTAINER */
+.header-container {
+  width: 1236px;                  /* EXACT Figma width */
+  height: 61px;                   /* 60.999874px */
+  margin: 29px auto 0;           /* matches top: 29px */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 106px;                     /* Figma gap between brand + nav */
+}
+
+/* BRAND SECTION */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* CIRCULAR BH LOGO */
+.header-logo {
+  width: 50px;
+  height: 50px;
+  background: #3D9970;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-brand-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* NAV LINKS */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 33px;               /* exact from your Figma gap: 33.05px */
+}
+
+.header-nav a {
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+  position: relative;
+}
+
+/* ACTIVE UNDERLINE */
+.header-nav .active {
+  font-weight: 500;
+}
+
+.header-nav .active .header-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffffff;
+  bottom: -6px;
+  width: 100%;
+}
+
+/* AUTH BUTTONS */
+.header-auth {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* from figma image spacing */
+}
+
+/* SIGN IN BUTTON (outline) */
+.btn-outline {
+  width: 140px;
+  height: 61px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #f5f5f5;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* LOGIN BUTTON (green) */
+.btn-primary {
+  width: 140px;
+  height: 61px;
+  background: #3D9970;
+  border-radius: 8px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 7px 10px; /* exact Figma padding */
+}
+
+/* PROFILE VIEW (when logged in) */
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.profile-name {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+/* TABLETS — below 1200px */
+@media (max-width: 1200px) {
+  .header-container {
+    width: 95%;
+    gap: 60px;                           /* reduce gap from Figma 106px */
+  }
+
+  .header-nav a {
+    font-size: 18px;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    width: 120px;
+    height: 52px;
+    font-size: 18px;
+  }
+}
+
+/* SMALL TABLETS — below 992px */
+@media (max-width: 992px) {
+  .header-container {
+    width: 95%;
+    gap: 40px;
+  }
+
+  .header-nav {
+    gap: 22px;
+  }
+
+  .header-nav a {
+    font-size: 16px;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    width: 110px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .profile-name {
+    font-size: 16px;
+  }
+}
+
+/* MOBILE — below 768px */
+@media (max-width: 768px) {
+
+  /* Turn into mobile header */
+  .header-container {
+    height: 70px;
+    margin-top: 10px;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  /* Hide nav items */
+  .header-nav {
+    display: none;
+  }
+
+  /* Show only buttons or avatar */
+  .header-auth {
+    gap: 8px;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    width: auto;
+    padding: 8px 14px;
+    height: auto;
+    font-size: 14px;
+  }
+
+  .header-logo {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .header-brand-name {
+    font-size: 22px;
+  }
+
+  .profile-avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .profile-name {
+    display: none; /* Avatar only, matches Figma mobile expectations */
+  }
+}
+
+/* VERY SMALL MOBILE — below 480px */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 12px;
+  }
+
+  .header-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-brand-name {
+    font-size: 20px;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+}
+
+/* MOBILE MENU BUTTON */
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  display: none;
+}
+
+/* MOBILE MENU WRAPPER */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 75%;
+  height: 100vh;
+  background: #0a0a0a;
+  padding: 2rem;
+  transition: right 0.3s ease;
+  z-index: 999;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-nav a {
+  display: block;
+  color: white;
+  margin-bottom: 1.4rem;
+  font-size: 1.2rem;
+}
+
+.mobile-auth {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-logout-btn {
+  margin-top: 1.5rem;
+  background: #ff4444;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+/* SHOW MOBILE MENU ICON ON SMALL SCREENS */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* PROFILE DROPDOWN */
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 0.6rem 0;
+  width: 160px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  z-index: 999;
+  animation: dropdownFade 0.25s ease;
+}
+
+/* ANIMATION */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LOGOUT BUTTON */
+.profile-dropdown button {
+  background: transparent;
+  color: #ddd;
+  border: none;
+  text-align: left;
+  padding: 10px 15px;
+  width: 100%;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.profile-dropdown button:hover {
+  background: #222;
+  color: #fff;
+}
+
+/* PLACEHOLDER FOR DROPDOWN WRAPPER */
+.header-profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

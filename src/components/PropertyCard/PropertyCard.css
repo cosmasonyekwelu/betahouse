@@ -1,0 +1,127 @@
+.card {
+  width: 350px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  overflow: hidden;
+  transition: 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* IMAGE */
+.card-media {
+  position: relative;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* BADGES */
+.badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.badge-featured {
+  background: #089d43;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-type {
+  background: #8aa0b5;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* TOOLS ICONS (camera, verify) */
+.tools {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.tools button {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* BODY */
+.card-body {
+  padding: 18px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.meta {
+  color: #6b7280;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.specs {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.specs div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* PRICE + ACTIONS */
+.footer-row {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  color: #6b7280;
+}
+
+.actions svg {
+  cursor: pointer;
+}
