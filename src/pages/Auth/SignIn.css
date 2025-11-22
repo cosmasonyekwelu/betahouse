@@ -1,137 +1,228 @@
+/* ===========================
+   SIGNIN PAGE — LAYOUT
+=========================== */
 .signin-page {
-  display: flex;
+  width: 100%;
   height: 100vh;
+  display: flex;
   background: #ffffff;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
 }
 
-/* LEFT PANEL */
+/* ===========================
+   LEFT PANEL
+=========================== */
 .signin-left {
-  flex: 1;
-  padding: 60px 80px;
+  width: 50%;
+  padding: 60px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .signin-title {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+  width: 455px;
 }
 
 .signin-subtitle {
   font-size: 14px;
   color: #555;
-  margin-bottom: 35px;
+  margin-bottom: 32px;
+  width: 455px;
 }
 
+/* ===========================
+   FORM
+=========================== */
 .signin-form {
-  max-width: 440px;
+  width: 455px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* FIELD */
 .signin-field label {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
 }
 
 .signin-field input {
   width: 100%;
-  padding: 14px;
-  margin-top: 6px;
-  border-radius: 10px;
-  border: 1px solid #d0d5dd;
-  margin-bottom: 18px;
+  height: 48px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 14px;
+  transition: 0.2s ease;
 }
 
-/* REMEMBER + FORGOT */
+.signin-field input:focus {
+  border-color: #2f8f5f;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(47, 143, 95, 0.2);
+}
+
+/* ===========================
+   REMEMBER + FORGOT
+=========================== */
 .signin-row {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 24px;
+  align-items: center;
+  margin-top: 5px;
 }
 
 .signin-checkbox {
   display: flex;
   align-items: center;
+  font-size: 13px;
+  color: #444;
   gap: 6px;
+}
+
+.signin-checkbox input {
+  width: 16px;
+  height: 16px;
 }
 
 .signin-forgot {
   background: none;
   border: none;
-  color: #d32f2f;
+  color: #EC5E5E;
+  font-size: 13px;
   cursor: pointer;
-  font-size: 14px;
+  padding: 0;
 }
 
-/* SIGN IN BUTTON */
+.signin-forgot:hover {
+  text-decoration: underline;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
 .signin-btn {
   width: 100%;
-  padding: 16px;
-  background: #2fa26d;
-  border-radius: 10px;
+  height: 50px;
+  background: #2f8f5f;
   color: white;
-  font-weight: 600;
   border: none;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s ease;
 }
 
-/* OR */
+.signin-btn:hover {
+  background: #267a50;
+}
+
+.signin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   OR DIVIDER
+=========================== */
 .signin-or {
+  width: 100%;
   text-align: center;
-  color: #999;
-  margin: 10px 0 20px;
+  margin: 10px 0;
   position: relative;
+}
+
+.signin-or::before,
+.signin-or::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ddd;
+}
+
+.signin-or::before {
+  left: 0;
+}
+.signin-or::after {
+  right: 0;
 }
 
 .signin-or span {
   background: #fff;
-  padding: 0 12px;
-  z-index: 3;
-  position: relative;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #777;
 }
 
-.signin-or::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  left: 0;
-  height: 1px;
-  background: #e5e7eb;
-}
-
-/* GOOGLE BUTTON */
+/* ===========================
+   GOOGLE BUTTON
+=========================== */
 .signin-google {
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  background: #fff;
+  height: 50px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: white;
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 12px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .signin-google img {
   width: 20px;
+  height: 20px;
 }
 
-/* BOTTOM TEXT */
+/* ===========================
+   BOTTOM LINK
+=========================== */
 .signin-bottom {
   text-align: center;
-  margin-top: 18px;
-  color: #555;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .signin-bottom a {
-  color: #2fa26d;
+  color: #2f8f5f;
   font-weight: 600;
 }
 
-/* RIGHT PANEL */
+/* ===========================
+   ERROR MESSAGE
+=========================== */
+.signin-error {
+  width: 455px;
+  background: #ffe6e6;
+  border: 1px solid #ffb3b3;
+  color: #c40000;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* ===========================
+   RIGHT PANEL
+=========================== */
 .signin-right {
-  flex: 1;
+  width: 50%;
+  height: 100%;
   position: relative;
 }
 
@@ -141,39 +232,186 @@
   object-fit: cover;
 }
 
-/* LOGO */
 .signin-logo {
   position: absolute;
-  top: 40px;
+  top: 35px;
   left: 40px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  z-index: 20;
+  gap: 12px;
+  z-index: 10;
 }
 
 .signin-logo-circle {
-  width: 54px;
-  height: 54px;
-  background: #32c57f;
+  width: 45px;
+  height: 45px;
+  background: #2f8f5f;
   border-radius: 50%;
   color: white;
+  font-weight: 700;
+  font-size: 18px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 20px;
+  align-items: center;
 }
 
 .signin-logo span {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   color: white;
 }
 
-/* RESPONSIVE */
+/* ============================================================
+   LARGE LAPTOPS (max-width: 1200px)
+============================================================ */
+@media (max-width: 1200px) {
+  .signin-left {
+    padding: 50px;
+  }
+
+  .signin-form {
+    width: 420px;
+  }
+
+  .signin-title {
+    width: 420px;
+    font-size: 28px;
+  }
+}
+
+/* ============================================================
+   TABLETS LANDSCAPE (max-width: 1024px)
+============================================================ */
+@media (max-width: 1024px) {
+  .signin-left {
+    padding: 45px;
+  }
+
+  .signin-form {
+    width: 380px;
+  }
+
+  .signin-right {
+    width: 50%;
+  }
+}
+
+
+/* ============================================================
+   TABLETS PORTRAIT (max-width: 900px)
+   → Switch to single column
+============================================================ */
 @media (max-width: 900px) {
   .signin-page {
     flex-direction: column;
+    min-height: auto;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .signin-right {
+    width: 100%;
+    height: 300px;
+    position: relative;
+  }
+
+  .signin-image {
+    object-position: center;
+  }
+
+  .signin-left {
+    width: 100%;
+    padding: 40px 30px;
+  }
+
+  .signin-form,
+  .signin-title {
+    width: 100%;
+  }
+}
+
+
+/* ============================================================
+   LARGE MOBILE (max-width: 768px)
+============================================================ */
+@media (max-width: 768px) {
+  .signin-title {
+    font-size: 26px;
+  }
+
+  .signin-subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .signin-form {
+    gap: 15px;
+  }
+
+  .signin-btn,
+  .signin-google {
+    height: 48px;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE (max-width: 600px)
+============================================================ */
+@media (max-width: 600px) {
+  .signin-left {
+    padding: 30px 20px;
+  }
+
+  .signin-title {
+    font-size: 23px;
+  }
+
+  .signin-field input {
+    height: 44px;
+  }
+
+  .signin-google img {
+    width: 16px;
+  }
+}
+
+
+/* ============================================================
+   EXTRA SMALL PHONES (max-width: 480px)
+============================================================ */
+@media (max-width: 480px) {
+  .signin-title {
+    font-size: 21px;
+  }
+
+  .signin-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .signin-google {
+    font-size: 13px;
+  }
+}
+
+
+/* ============================================================
+   ULTRA SMALL DEVICES (max-width: 360px)
+============================================================ */
+@media (max-width: 360px) {
+  .signin-title {
+    font-size: 19px;
+  }
+
+  .signin-field input {
+    font-size: 13px;
+  }
+
+  .signin-btn,
+  .signin-google {
+    height: 44px;
+    font-size: 13px;
   }
 }
