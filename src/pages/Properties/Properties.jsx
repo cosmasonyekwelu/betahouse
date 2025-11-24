@@ -7,34 +7,40 @@ import Pagination from "../../components/Pagination/Pagination";
 import PopularProperties from "../../components/PopularProperties/PopularProperties";
 import Footer from "../../components/Footer/Footer";
 
-import API from "../../api/axios"; 
-import localProperties from "../../data/properties"; 
+import API from "../../api/axios";
+import localProperties from "../../data/properties";
 
 import "./Properties.css";
 
 export default function Properties() {
-
-  const [query, setQuery] = useState({
-    sort: "default",
-  });
-
-  const [items, setItems] = useState([]);  
+  const [query, setQuery] = useState({ sort: "default" });
+  const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
-
-
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
   const [page, setPage] = useState(1);
   const pageSize = 9;
 
+  // SORTING UTILITY
+  const sortData = (data) => {
+    switch (query.sort) {
+      case "price-desc":
+        return data.sort((a, b) => b.price - a.price);
+      case "price-asc":
+        return data.sort((a, b) => a.price - b.price);
+      default:
+        return data;
+    }
+  };
 
+  // API FETCH
   const fetchProperties = async () => {
     setLoading(true);
     setErrorMsg("");
 
     try {
-      const res = await API.get("/properties", {
+      const response = await API.get("/properties", {
         params: {
           page,
           pageSize,
@@ -42,12 +48,11 @@ export default function Properties() {
         },
       });
 
-      const backendItems = res.data.items || [];
-      const backendTotal = res.data.meta?.total || 0;
+      const backendItems = response.data.items || [];
+      const backendTotal = response.data.meta?.total || 0;
 
-      // If backend returns an empty array → fallback to local data
       if (backendItems.length === 0) {
-        console.warn("No backend properties → using fallback data.");
+        console.warn("Backend returned 0 — Falling back to local data");
 
         const sortedLocal = sortData([...localProperties]);
         const pagedLocal = sortedLocal.slice((page - 1) * pageSize, page * pageSize);
@@ -59,32 +64,20 @@ export default function Properties() {
 
       setItems(backendItems);
       setTotal(backendTotal);
+    } catch (err) {
+      console.error("API error — Using fallback data:", err);
+      setErrorMsg("Unable to load properties. Showing offline results.");
 
-    } catch (error) {
-      console.error("API error → switching to local fallback:", error);
-
-      setErrorMsg("Unable to reach server. Showing offline properties.");
-
-      // Fallback offline properties
       const sortedLocal = sortData([...localProperties]);
       const pagedLocal = sortedLocal.slice((page - 1) * pageSize, page * pageSize);
 
       setItems(pagedLocal);
       setTotal(sortedLocal.length);
-
     } finally {
       setLoading(false);
     }
   };
 
-  // Sorting function
-  const sortData = (data) => {
-    if (query.sort === "price-desc") return data.sort((a, b) => b.price - a.price);
-    if (query.sort === "price-asc") return data.sort((a, b) => a.price - b.price);
-    return data; 
-  };
-
-  
   useEffect(() => {
     fetchProperties();
   }, [page, query]);
@@ -96,15 +89,13 @@ export default function Properties() {
 
       <Header />
 
-      {/* HERO SEARCH UI */}
       <Hero query={query} setQuery={setQuery} />
 
       <main className="properties-container">
 
-        {/* ERROR MESSAGE */}
         {errorMsg && <div className="properties-error">{errorMsg}</div>}
 
-        {/* TOPBAR */}
+        {/* TOP BAR */}
         <div className="properties-topbar">
           <button className="filter-btn">More Filter</button>
 
@@ -112,7 +103,6 @@ export default function Properties() {
             Showing {Math.min(page * pageSize, total)} of {total} results
           </span>
 
-          {/* SORT BOX */}
           <div className="sort-box">
             <label>Sort by:&nbsp;</label>
             <select
@@ -129,10 +119,8 @@ export default function Properties() {
           </div>
         </div>
 
-        {/* LOADING */}
         {loading && <div className="properties-loading">Loading properties…</div>}
 
-        {/* PROPERTY GRID */}
         {!loading && (
           <section className="properties-grid">
             {items.length === 0 ? (
@@ -145,16 +133,12 @@ export default function Properties() {
           </section>
         )}
 
-        {/* PAGINATION */}
         <Pagination page={page} pages={pages} onChange={setPage} />
 
-        {/* POPULAR PROPERTIES */}
         <PopularProperties items={localProperties.slice(0, 6)} />
-
       </main>
 
       <Footer />
-
     </div>
   );
 }
