@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API from "../../api/axios";        
+import API from "../../api/axios";
 import "./SignIn.css";
-
 
 import authImg from "/auth.jpg";
 import googleIcon from "/google-icon.png";
@@ -10,20 +9,17 @@ import googleIcon from "/google-icon.png";
 export default function SignIn() {
   const navigate = useNavigate();
 
-
   const [form, setForm] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-
   const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,22 +33,14 @@ export default function SignIn() {
     try {
       setLoading(true);
 
-    
       const res = await API.post("/auth/signin", form);
 
-  
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-     
       navigate("/properties");
-
     } catch (err) {
-      if (err.response?.data?.message) {
-        setErrorMsg(err.response.data.message);
-      } else {
-        setErrorMsg("Login failed. Please try again.");
-      }
+      setErrorMsg(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -67,7 +55,7 @@ export default function SignIn() {
         <h1 className="signin-title">Welcome Back to BetaHouse!</h1>
 
         <p className="signin-subtitle">
-          Lets get started by filling out the information below
+          Let’s get started by filling out the information below.
         </p>
 
         {/* ERROR */}
@@ -77,7 +65,7 @@ export default function SignIn() {
 
           <div className="signin-field">
             <label>Email</label>
-            <input 
+            <input
               type="email"
               name="email"
               value={form.email}
@@ -88,7 +76,7 @@ export default function SignIn() {
 
           <div className="signin-field">
             <label>Password</label>
-            <input 
+            <input
               type="password"
               name="password"
               value={form.password}
@@ -129,16 +117,14 @@ export default function SignIn() {
 
       {/* RIGHT IMAGE */}
       <div className="signin-right">
-        <div className="signin-logo">
+
+        {/* CLICKABLE LOGO */}
+        <Link to="/" className="signin-logo">
           <div className="signin-logo-circle">BH</div>
           <span>BetaHouse</span>
-        </div>
+        </Link>
 
-        <img 
-          src={authImg}
-          className="signin-image"
-          alt="Auth"
-        />
+        <img src={authImg} className="signin-image" alt="Authentication" />
       </div>
 
     </div>

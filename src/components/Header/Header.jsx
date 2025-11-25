@@ -13,7 +13,7 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // --- FIX JSON ERROR SAFELY ---
+ 
   useEffect(() => {
     try {
       const stored = localStorage.getItem("user");
@@ -59,9 +59,30 @@ export default function Header() {
             Properties
           </Link>
 
-          <Link to="/about" className={location.pathname === "/about" ? "active" : ""}>About Us</Link>
-          <Link to="/blog" className={location.pathname === "/blog" ? "active" : ""}>Blog</Link>
-          <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>Contact Us</Link>
+       <Link
+  to="#"
+  onClick={(e) => e.preventDefault()}
+  className="nav-disabled"
+>
+  About Us
+</Link>
+
+<Link
+  to="#"
+  onClick={(e) => e.preventDefault()}
+  className="nav-disabled"
+>
+  Blog
+</Link>
+
+<Link
+  to="#"
+  onClick={(e) => e.preventDefault()}
+  className="nav-disabled"
+>
+  Contact Us
+</Link>
+
         </nav>
 
         {/* DESKTOP AUTH */}

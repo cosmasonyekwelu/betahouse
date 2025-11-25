@@ -8,71 +8,44 @@ import PopularProperties from "../../components/PopularProperties/PopularPropert
 import Footer from "../../components/Footer/Footer";
 
 import API from "../../api/axios";
-import localProperties from "../../data/properties";
-
 import "./Properties.css";
 
 export default function Properties() {
   const [query, setQuery] = useState({ sort: "default" });
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
   const [page, setPage] = useState(1);
   const pageSize = 9;
 
-  // SORTING UTILITY
-  const sortData = (data) => {
-    switch (query.sort) {
-      case "price-desc":
-        return data.sort((a, b) => b.price - a.price);
-      case "price-asc":
-        return data.sort((a, b) => a.price - b.price);
-      default:
-        return data;
-    }
-  };
-
-  // API FETCH
   const fetchProperties = async () => {
     setLoading(true);
     setErrorMsg("");
 
     try {
-      const response = await API.get("/properties", {
+      const useSearch =
+        query.location || query.type || query.bedrooms
+          ? "/search"
+          : "/properties";
+
+      const response = await API.get(useSearch, {
         params: {
+          ...query,
           page,
           pageSize,
           sort: query.sort !== "default" ? query.sort : undefined,
         },
       });
 
-      const backendItems = response.data.items || [];
-      const backendTotal = response.data.meta?.total || 0;
-
-      if (backendItems.length === 0) {
-        console.warn("Backend returned 0 — Falling back to local data");
-
-        const sortedLocal = sortData([...localProperties]);
-        const pagedLocal = sortedLocal.slice((page - 1) * pageSize, page * pageSize);
-
-        setItems(pagedLocal);
-        setTotal(sortedLocal.length);
-        return;
-      }
-
-      setItems(backendItems);
-      setTotal(backendTotal);
+      setItems(response.data.items || []);
+      setTotal(response.data.meta?.total || 0);
     } catch (err) {
-      console.error("API error — Using fallback data:", err);
-      setErrorMsg("Unable to load properties. Showing offline results.");
-
-      const sortedLocal = sortData([...localProperties]);
-      const pagedLocal = sortedLocal.slice((page - 1) * pageSize, page * pageSize);
-
-      setItems(pagedLocal);
-      setTotal(sortedLocal.length);
+      setErrorMsg("Unable to load properties.");
+      setItems([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
@@ -86,16 +59,13 @@ export default function Properties() {
 
   return (
     <div className="properties-page">
-
       <Header />
 
-      <Hero query={query} setQuery={setQuery} />
+      <Hero query={query} setQuery={setQuery} setPage={setPage} />
 
       <main className="properties-container">
-
         {errorMsg && <div className="properties-error">{errorMsg}</div>}
 
-        {/* TOP BAR */}
         <div className="properties-topbar">
           <button className="filter-btn">More Filter</button>
 
@@ -124,18 +94,16 @@ export default function Properties() {
         {!loading && (
           <section className="properties-grid">
             {items.length === 0 ? (
-              <p className="no-results">No properties available.</p>
+              <p className="no-results">No properties found.</p>
             ) : (
-              items.map((p) => (
-                <PropertyCard key={p._id || p.id} data={p} />
-              ))
+              items.map((p) => <PropertyCard key={p._id} data={p} />)
             )}
           </section>
         )}
 
         <Pagination page={page} pages={pages} onChange={setPage} />
 
-        <PopularProperties items={localProperties.slice(0, 6)} />
+        <PopularProperties items={[]} />
       </main>
 
       <Footer />

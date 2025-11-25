@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API from "../../api/axios"; 
+import API from "../../api/axios";
 import "./SignUp.css";
 
 import authImg from "/auth.jpg";
@@ -15,7 +15,7 @@ export default function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
-    agree: true
+    agree: true,
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export default function SignUp() {
     e.preventDefault();
     setErrorMsg("");
 
-
+    // Validation
     if (!form.firstName || !form.lastName || !form.email || !form.password) {
       setErrorMsg("Please fill out all fields.");
       return;
@@ -53,7 +53,7 @@ export default function SignUp() {
     const payload = {
       name: `${form.firstName} ${form.lastName}`,
       email: form.email,
-      password: form.password
+      password: form.password,
     };
 
     try {
@@ -61,13 +61,10 @@ export default function SignUp() {
 
       const res = await API.post("/auth/signup", payload);
 
-   
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-  
       navigate("/properties");
-
     } catch (err) {
       if (err.response?.data?.message) {
         setErrorMsg(err.response.data.message);
@@ -88,11 +85,11 @@ export default function SignUp() {
       <div className="signup-left">
 
         <h1 className="signup-title">
-          Join our community of home seekers and explore the possibilities that await.
+          Join our community of home seekers and explore new possibilities.
         </h1>
 
         <p className="signup-subtitle">
-          Let's get started by filling out the information below
+          Let's get started by filling out the information below.
         </p>
 
         {errorMsg && <div className="signup-error">{errorMsg}</div>}
@@ -102,9 +99,9 @@ export default function SignUp() {
           <div className="signup-row">
             <div className="signup-field">
               <label>First Name</label>
-              <input 
+              <input
                 type="text"
-                placeholder="Enter Name"
+                placeholder="Enter name"
                 name="firstName"
                 value={form.firstName}
                 onChange={handleChange}
@@ -113,9 +110,9 @@ export default function SignUp() {
 
             <div className="signup-field">
               <label>Last Name</label>
-              <input 
+              <input
                 type="text"
-                placeholder="Enter Name"
+                placeholder="Enter name"
                 name="lastName"
                 value={form.lastName}
                 onChange={handleChange}
@@ -125,9 +122,9 @@ export default function SignUp() {
 
           <div className="signup-field">
             <label>Email</label>
-            <input 
+            <input
               type="email"
-              placeholder="Enter your Email"
+              placeholder="Enter your email"
               name="email"
               value={form.email}
               onChange={handleChange}
@@ -136,7 +133,7 @@ export default function SignUp() {
 
           <div className="signup-field">
             <label>Password</label>
-            <input 
+            <input
               type="password"
               placeholder="Enter your password"
               name="password"
@@ -147,7 +144,7 @@ export default function SignUp() {
 
           <div className="signup-field">
             <label>Confirm Password</label>
-            <input 
+            <input
               type="password"
               placeholder="Confirm your password"
               name="confirmPassword"
@@ -160,9 +157,9 @@ export default function SignUp() {
             <input
               type="checkbox"
               checked={form.agree}
-              onChange={(e)=> setForm({...form, agree: e.target.checked})}
+              onChange={(e) => setForm({ ...form, agree: e.target.checked })}
             />
-            I agree to <span>Terms of Service</span> and <span>Privacy Policies</span>
+            I agree to <span>Terms of Service</span> and <span>Privacy Policy</span>
           </label>
 
           <button className="signup-btn" disabled={loading}>
@@ -185,12 +182,14 @@ export default function SignUp() {
 
       {/* RIGHT PANEL */}
       <div className="signup-right">
-        <div className="signup-logo">
+
+        {/* CLICKABLE LOGO */}
+        <Link to="/" className="signup-logo">
           <div className="signup-logo-circle">BH</div>
           <span>BetaHouse</span>
-        </div>
+        </Link>
 
-        <img 
+        <img
           src={authImg}
           alt="Signup"
           className="signup-image"
